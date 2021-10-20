@@ -53,6 +53,7 @@ jobs:
         with:
           repository: godotengine/godot
           ref: ${{ env.GODOT_BASE_BRANCH }}
+          path: godot
        
       - uses: actions/checkout@v2
 
@@ -79,21 +80,27 @@ jobs:
 
       - name: Compilation
         run: |
+          cd godot
           scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} -j2
+          cd ..
           
       # Generate mono glue
       - name: Mono Glue Generator
         if: ${{ matrix.build-mono }}
         run: |
+          cd godot
           ${{ matrix.bin }} --headless --generate-mono-glue modules/mono/glue || true
+          cd ..
 
       # Rebuild with mono
       - name: Compilation (mono_glue=yes)
         uses: ./.github/actions/godot-build
         if: ${{ matrix.build-mono }}
         with:
+          cd godot
           scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} mono_glue=yes -j2
           ls bin/
+          cd ..
 
       - name: Upload artifact
         uses: ./.github/actions/upload-artifact
