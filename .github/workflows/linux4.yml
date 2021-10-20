@@ -50,12 +50,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - uses: actions/checkout@v2
         with:
           repository: godotengine/godot
           ref: ${{ env.GODOT_BASE_BRANCH }}
           path: godot
-       
-      - uses: actions/checkout@v2
 
       - name: Linux dependencies
         shell: bash
@@ -80,6 +80,7 @@ jobs:
 
       - name: Compilation
         run: |
+          ls
           cd godot
           scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} -j2
           cd ..
