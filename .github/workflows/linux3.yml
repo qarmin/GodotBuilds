@@ -11,10 +11,6 @@ env:
   GODOT_BASE_BRANCH: 3.x
   SCONSFLAGS: use_ubsan=yes use_asan=yes
 
-concurrency:
-  group: ci-${{github.actor}}-${{github.head_ref || github.run_number}}-${{github.ref}}-linux
-  cancel-in-progress: true
-
 jobs:
   build-linux:
     runs-on: "ubuntu-20.04"
@@ -85,7 +81,7 @@ jobs:
           cd godot
           scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} -j2
           cd ..
-          
+
       # Generate mono glue
       - name: Mono Glue Generator
         if: ${{ matrix.build-mono }}
