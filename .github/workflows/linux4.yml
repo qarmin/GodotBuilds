@@ -91,10 +91,9 @@ jobs:
           cd ..;
 
       # Rebuild with mono
-      - name: Compilation (mono_glue=yes)
-        uses: ./.github/actions/godot-build
+      - name: Compilation Mono Glue
         if: ${{ matrix.build-mono }}
-        with:
+        run: |
           cd godot;
           scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} mono_glue=yes -j2;
           ls bin;
