@@ -29,6 +29,7 @@ jobs:
             tools: true
             tests: false
             sconsflags: module_mono_enabled=yes mono_glue=no
+            build-mono: true
             bin: "./bin/godot.x11.tools.64s.mono"
             artifact: true
 
@@ -50,11 +51,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - uses: actions/checkout@v2
         with:
           repository: godotengine/godot
           ref: ${{ env.GODOT_BASE_BRANCH }}
-       
-      - uses: actions/checkout@v2
+          path: godot
 
       - name: Linux dependencies
         shell: bash
@@ -79,21 +81,28 @@ jobs:
 
       - name: Compilation
         run: |
+          ls
+          cd godot
           scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} -j2
+          cd ..
           
       # Generate mono glue
       - name: Mono Glue Generator
         if: ${{ matrix.build-mono }}
         run: |
-          DRI_PRIME=0 xvfb-run ${{ matrix.bin }} --generate-mono-glue modules/mono/glue || true
+          cd godot
+          DRI_PRIME=0 xvfb-run ${{ matrix.bin }} --headless --generate-mono-glue modules/mono/glue || true
+          cd ..
 
       # Rebuild with mono
       - name: Compilation (mono_glue=yes)
         uses: ./.github/actions/godot-build
         if: ${{ matrix.build-mono }}
         with:
+          cd godot
           scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} mono_glue=yes -j2
           ls bin/
+          cd ..
 
       - name: Upload artifact
         uses: ./.github/actions/upload-artifact
