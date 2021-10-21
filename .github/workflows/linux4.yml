@@ -9,7 +9,6 @@ on:
 # Global Settings
 env:
   GODOT_BASE_BRANCH: master
-<<<<<<< Updated upstream
   SCONSFLAGS: debug_symbols=yes
 
 jobs:
