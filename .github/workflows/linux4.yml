@@ -29,6 +29,7 @@ jobs:
             tools: true
             tests: false
             sconsflags: module_mono_enabled=yes mono_glue=no
+            build-mono: true
             bin: "./bin/godot.linuxbsd.tools.64s.mono"
             artifact: true
 
