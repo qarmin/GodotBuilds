@@ -11,10 +11,6 @@ env:
   GODOT_BASE_BRANCH: master
   SCONSFLAGS: use_ubsan=yes use_asan=yes
 
-concurrency:
-  group: ci-${{github.actor}}-${{github.head_ref || github.run_number}}-${{github.ref}}-linux
-  cancel-in-progress: true
-
 jobs:
   build-godot4:
     runs-on: "ubuntu-20.04"
