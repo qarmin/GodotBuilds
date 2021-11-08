@@ -1,18 +1,18 @@
-name: 🐧 Linux Builds 4
+name: 🐧 Linux Builds 3.4
 on:
   push:
   pull_request:
   schedule:
-    - cron: '0 23 * * */2'
+    - cron: '0 23 1 * *'
 
 
 # Global Settings
 env:
-  GODOT_BASE_BRANCH: master
+  GODOT_BASE_BRANCH: 3.4
   SCONSFLAGS: debug_symbols=yes
 
 jobs:
-  build-godot4:
+  build-linux:
     runs-on: "ubuntu-20.04"
     name: ${{ matrix.name }}
     strategy:
@@ -20,57 +20,57 @@ jobs:
       matrix:
         include:
           - name: Editor Mono Sanitizers
-            cache-name: linux4-editor-mono-sanitizers
+            cache-name: linux34-editor-mono-sanitizers
             target: debug
             tools: true
             tests: false
             sconsflags: module_mono_enabled=yes mono_glue=no use_ubsan=yes use_asan=yes
             build-mono: true
-            bin: "./bin/godot.linuxbsd.tools.64s.mono"
+            bin: "./bin/godot.x11.tools.64s.mono"
             artifact: true
 
           - name: Editor Sanitizers
-            cache-name: linux4-editor-sanitizers
+            cache-name: linux34-editor-sanitizers
             target: debug
             tools: true
             tests: false
             sconsflags: use_ubsan=yes use_asan=yes
-            bin: "./bin/godot.linuxbsd.tools.64s"
+            bin: "./bin/godot.x11.tools.64s"
             artifact: true
             
           - name: Template Release Sanitizers
-            cache-name: linux4-template-sanitizers
+            cache-name: linux34-template-sanitizers
             target: release
             tools: false
             tests: false
             sconsflags: use_ubsan=yes use_asan=yes
-            bin: "./bin/godot.linuxbsd.opt.64s"
+            bin: "./bin/godot.x11.opt.64s"
             artifact: true
             
           - name: Editor Mono Normal
-            cache-name: linux4-editor-mono-normal
+            cache-name: linux34-editor-mono-normal
             target: debug
             tools: true
             tests: false
             sconsflags: module_mono_enabled=yes mono_glue=no
             build-mono: true
-            bin: "./bin/godot.linuxbsd.tools.64.mono"
+            bin: "./bin/godot.x11.tools.64.mono"
             artifact: true
 
           - name: Editor Normal
-            cache-name: linux4-editor-normal
+            cache-name: linux34-editor-normal
             target: debug
             tools: true
             tests: false
-            bin: "./bin/godot.linuxbsd.tools.64"
+            bin: "./bin/godot.x11.tools.64"
             artifact: true
             
           - name: Template Release Normal
-            cache-name: linux4-template-normal
+            cache-name: linux34-template-normal
             target: release
             tools: false
             tests: false
-            bin: "./bin/godot.linuxbsd.opt.64"
+            bin: "./bin/godot.x11.opt.64"
             artifact: true
 
     steps:
@@ -105,27 +105,27 @@ jobs:
 
       - name: Compilation
         run: |
-          ls;
-          cd godot;
-          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} -j2;
-          cd ..;
-          
+          ls
+          cd godot
+          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} -j2
+          cd ..
+
       # Generate mono glue
       - name: Mono Glue Generator
         if: ${{ matrix.build-mono }}
         run: |
-          cd godot;
-          ${{ matrix.bin }} --headless --generate-mono-glue modules/mono/glue || true;
-          cd ..;
+          cd godot
+          DRI_PRIME=0 xvfb-run ${{ matrix.bin }} --headless --generate-mono-glue modules/mono/glue || true
+          cd ..
 
       # Rebuild with mono
-      - name: Compilation Mono Glue
+      - name: Compilation (mono_glue=yes)
         if: ${{ matrix.build-mono }}
         run: |
-          cd godot;
-          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} mono_glue=yes -j2;
-          ls bin;
-          cd ..;
+          cd godot
+          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} mono_glue=yes -j2
+          ls bin/
+          cd ..
 
       - name: Upload artifact
         uses: ./.github/actions/upload-artifact
