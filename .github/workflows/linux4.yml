@@ -9,7 +9,7 @@ on:
 # Global Settings
 env:
   GODOT_BASE_BRANCH: master
-  SCONSFLAGS: debug_symbols=yes
+  SCONSFLAGS: debug_symbols=yes CCFLAGS="-fpie" LINKFLAGS="-no-pie"
 
 jobs:
   build-godot4:
