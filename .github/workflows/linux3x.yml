@@ -72,6 +72,34 @@ jobs:
             tests: false
             bin: "./bin/godot.x11.opt.64"
             artifact: true
+            
+          - name: Editor Mono Sanitizers LLVM
+            cache-name: linux3x-editor-mono-sanitizers-llvm
+            target: debug
+            tools: true
+            tests: false
+            sconsflags: module_mono_enabled=yes mono_glue=no use_ubsan=yes use_asan=yes use_llvm=yes
+            build-mono: true
+            bin: "./bin/godot.x11.tools.64.llvms.mono"
+            artifact: true
+
+          - name: Editor Sanitizers LLVM
+            cache-name: linux3x-editor-sanitizers
+            target: debug
+            tools: true
+            tests: false
+            sconsflags: use_ubsan=yes use_asan=yes use_llvm=yes
+            bin: "./bin/godot.x11.tools.64.llvms"
+            artifact: true
+            
+          - name: Template Release Sanitizers LLVM
+            cache-name: linux3x-template-sanitizers-mono
+            target: release
+            tools: false
+            tests: false
+            sconsflags: use_ubsan=yes use_asan=yes use_llvm=yes
+            bin: "./bin/godot.x11.opt.64.llvms"
+            artifact: true
 
     steps:
       - uses: actions/checkout@v2
