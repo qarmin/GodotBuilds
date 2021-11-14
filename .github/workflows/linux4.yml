@@ -79,7 +79,7 @@ jobs:
             artifact: true
 
           - name: Editor Sanitizers LLVM
-            cache-name: linux4-editor-sanitizers
+            cache-name: linux4-editor-sanitizers-llvm
             target: debug
             tools: true
             tests: false
@@ -88,7 +88,7 @@ jobs:
             artifact: true
             
           - name: Template Release Sanitizers LLVM
-            cache-name: linux4-template-sanitizers-mono
+            cache-name: linux4-template-sanitizers-llvm
             target: release
             tools: false
             tests: false
