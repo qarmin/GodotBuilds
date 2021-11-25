@@ -19,15 +19,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Editor Mono Sanitizers
-            cache-name: linux34-editor-mono-sanitizers
-            target: debug
-            tools: true
-            tests: false
-            sconsflags: module_mono_enabled=yes mono_glue=no use_ubsan=yes use_asan=yes
-            build-mono: true
-            bin: "./bin/godot.x11.tools.64s.mono"
-            artifact: true
+#          - name: Editor Mono Sanitizers
+#            cache-name: linux34-editor-mono-sanitizers
+#            target: debug
+#            tools: true
+#            tests: false
+#            sconsflags: module_mono_enabled=yes mono_glue=no use_ubsan=yes use_asan=yes
+#            build-mono: true
+#            bin: "./bin/godot.x11.tools.64s.mono"
+#            artifact: true
 
           - name: Editor Sanitizers
             cache-name: linux34-editor-sanitizers
@@ -47,15 +47,15 @@ jobs:
             bin: "./bin/godot.x11.opt.64s"
             artifact: true
             
-          - name: Editor Mono Normal
-            cache-name: linux34-editor-mono-normal
-            target: debug
-            tools: true
-            tests: false
-            sconsflags: module_mono_enabled=yes mono_glue=no
-            build-mono: true
-            bin: "./bin/godot.x11.tools.64.mono"
-            artifact: true
+#          - name: Editor Mono Normal
+#            cache-name: linux34-editor-mono-normal
+#            target: debug
+#            tools: true
+#            tests: false
+#            sconsflags: module_mono_enabled=yes mono_glue=no
+#            build-mono: true
+#            bin: "./bin/godot.x11.tools.64.mono"
+#            artifact: true
 
           - name: Editor Normal
             cache-name: linux34-editor-normal
@@ -107,7 +107,7 @@ jobs:
         run: |
           ls
           cd godot
-          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} -j2
+          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} target=${{ matrix.target }} tools=${{ matrix.tools }} -j2
           cd ..
 
       # Generate mono glue
@@ -123,7 +123,7 @@ jobs:
         if: ${{ matrix.build-mono }}
         run: |
           cd godot
-          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} mono_glue=yes -j2
+          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} target=${{ matrix.target }} tools=${{ matrix.tools }} mono_glue=yes -j2
           ls bin/
           cd ..
 

@@ -135,7 +135,7 @@ jobs:
         run: |
           ls
           cd godot
-          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} -j2
+          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} target=${{ matrix.target }} tools=${{ matrix.tools }} -j2
           cd ..
 
       # Generate mono glue
@@ -147,11 +147,11 @@ jobs:
           cd ..
 
       # Rebuild with mono
-      - name: Compilation (mono_glue=yes)
+      - name: Compilation Mono Glue
         if: ${{ matrix.build-mono }}
         run: |
           cd godot
-          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} mono_glue=yes -j2
+          scons ${{ env.SCONSFLAGS }} ${{ matrix.sconsflags }} target=${{ matrix.target }} tools=${{ matrix.tools }} mono_glue=yes -j2
           ls bin/
           cd ..
 
