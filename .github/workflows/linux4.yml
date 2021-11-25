@@ -3,7 +3,7 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: '0 23 * * */2'
+    - cron: '0 23 * * *'
 
 
 # Global Settings
@@ -19,14 +19,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Editor Mono Sanitizers
-            cache-name: linux4-editor-mono-sanitizers
-            target: debug
-            tools: true
-            sconsflags: module_mono_enabled=yes mono_glue=no use_ubsan=yes use_asan=yes tests=yes
-            build-mono: true
-            bin: "./bin/godot.linuxbsd.tools.64s.mono"
-            artifact: true
+#          - name: Editor Mono Sanitizers
+#            cache-name: linux4-editor-mono-sanitizers
+#            target: debug
+#            tools: true
+#            sconsflags: module_mono_enabled=yes mono_glue=no use_ubsan=yes use_asan=yes tests=yes
+#            build-mono: true
+#            bin: "./bin/godot.linuxbsd.tools.64s.mono"
+#            artifact: true
 
           - name: Editor Sanitizers
             cache-name: linux4-editor-sanitizers
@@ -44,14 +44,14 @@ jobs:
             bin: "./bin/godot.linuxbsd.opt.64s"
             artifact: true
             
-          - name: Editor Mono Normal
-            cache-name: linux4-editor-mono-normal
-            target: debug
-            tools: true
-            sconsflags: module_mono_enabled=yes mono_glue=no tests=yes
-            build-mono: true
-            bin: "./bin/godot.linuxbsd.tools.64.mono"
-            artifact: true
+#          - name: Editor Mono Normal
+#            cache-name: linux4-editor-mono-normal
+#            target: debug
+#            tools: true
+#            sconsflags: module_mono_enabled=yes mono_glue=no tests=yes
+#            build-mono: true
+#            bin: "./bin/godot.linuxbsd.tools.64.mono"
+#            artifact: true
 
           - name: Editor Normal
             cache-name: linux4-editor-normal
@@ -68,33 +68,33 @@ jobs:
             bin: "./bin/godot.linuxbsd.opt.64"
             artifact: true
             
-          - name: Editor Mono Sanitizers LLVM
-            cache-name: linux4-editor-mono-sanitizers-llvm
-            target: debug
-            tools: true
-            tests: false
-            sconsflags: module_mono_enabled=yes mono_glue=no use_ubsan=yes use_asan=yes use_llvm=yes
-            build-mono: true
-            bin: "./bin/godot.linuxbsd.tools.64.llvms.mono"
-            artifact: true
-
-          - name: Editor Sanitizers LLVM
-            cache-name: linux4-editor-sanitizers-llvm
-            target: debug
-            tools: true
-            tests: false
-            sconsflags: use_ubsan=yes use_asan=yes use_llvm=yes
-            bin: "./bin/godot.linuxbsd.tools.64.llvms"
-            artifact: true
-            
-          - name: Template Release Sanitizers LLVM
-            cache-name: linux4-template-sanitizers-llvm
-            target: release
-            tools: false
-            tests: false
-            sconsflags: use_ubsan=yes use_asan=yes use_llvm=yes
-            bin: "./bin/godot.linuxbsd.opt.64.llvms"
-            artifact: true
+#          - name: Editor Mono Sanitizers LLVM
+#            cache-name: linux4-editor-mono-sanitizers-llvm
+#            target: debug
+#            tools: true
+#            tests: false
+#            sconsflags: module_mono_enabled=yes mono_glue=no use_ubsan=yes use_asan=yes use_llvm=yes
+#            build-mono: true
+#            bin: "./bin/godot.linuxbsd.tools.64.llvms.mono"
+#            artifact: true
+#
+#          - name: Editor Sanitizers LLVM
+#            cache-name: linux4-editor-sanitizers-llvm
+#            target: debug
+#            tools: true
+#            tests: false
+#            sconsflags: use_ubsan=yes use_asan=yes use_llvm=yes
+#            bin: "./bin/godot.linuxbsd.tools.64.llvms"
+#            artifact: true
+#            
+#          - name: Template Release Sanitizers LLVM
+#            cache-name: linux4-template-sanitizers-llvm
+#            target: release
+#            tools: false
+#            tests: false
+#            sconsflags: use_ubsan=yes use_asan=yes use_llvm=yes
+#            bin: "./bin/godot.linuxbsd.opt.64.llvms"
+#            artifact: true
 
     steps:
       - uses: actions/checkout@v2
