@@ -43,7 +43,7 @@ jobs:
             target: release
             tools: false
             tests: false
-            sconsflags: use_ubsan=yes use_asan=yes
+            sconsflags: use_ubsan=yes use_asan=yes optimize=none
             bin: "./bin/godot.x11.opt.64s"
             artifact: true
             
@@ -70,6 +70,7 @@ jobs:
             target: release
             tools: false
             tests: false
+            sconsflags: optimize=none
             bin: "./bin/godot.x11.opt.64"
             artifact: true
 

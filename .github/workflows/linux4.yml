@@ -40,7 +40,7 @@ jobs:
             cache-name: linux4-template-sanitizers
             target: release
             tools: false
-            sconsflags: use_ubsan=yes use_asan=yes
+            sconsflags: use_ubsan=yes use_asan=yes optimize=none
             bin: "./bin/godot.linuxbsd.opt.64s"
             artifact: true
             
@@ -65,6 +65,7 @@ jobs:
             cache-name: linux4-template-normal
             target: release
             tools: false
+            sconsflags: optimize=none
             bin: "./bin/godot.linuxbsd.opt.64"
             artifact: true
             
@@ -92,7 +93,7 @@ jobs:
 #            target: release
 #            tools: false
 #            tests: false
-#            sconsflags: use_ubsan=yes use_asan=yes use_llvm=yes
+#            sconsflags: use_ubsan=yes use_asan=yes use_llvm=yes optimize=none
 #            bin: "./bin/godot.linuxbsd.opt.64.llvms"
 #            artifact: true
 
