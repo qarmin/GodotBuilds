@@ -6,7 +6,7 @@ on:
     - cron: '0 23 * * *'
 
 
-# Global Settings
+# Global Settings 
 env:
   GODOT_BASE_BRANCH: 3.x
   SCONSFLAGS: debug_symbols=yes
