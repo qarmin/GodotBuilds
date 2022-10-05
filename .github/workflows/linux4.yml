@@ -96,14 +96,14 @@ jobs:
             cache-name: linux4-editor-thread-sanitizer
             target: editor
             tools: true
-            sconsflags: tests=yes use_llvm=yes use_tsan=yes optimize=speed module_lightmapper_rd_enabled=no  module_mobile_vr_enabled=no module_webp_enabled=no module_text_server_adv_enabled=no module_raycast_enabled=no module_mobile_vr_enabled=no linker=gold
+            sconsflags: tests=yes debug_symbols=yes use_llvm=yes use_tsan=yes optimize=speed module_lightmapper_rd_enabled=no  module_mobile_vr_enabled=no module_webp_enabled=no module_text_server_adv_enabled=no module_raycast_enabled=no module_mobile_vr_enabled=no linker=gold
             artifact: true
 
           - name: Editor Normal
             cache-name: linux4-editor-memory-sanitizer
             target: editor
             tools: true
-            sconsflags: tests=yes use_llvm=yes use_msan=yes udev=no linker=gold # Disable udev because memory sanitizer finds invalid memory usage inside udev library
+            sconsflags: tests=yes debug_symbols=yes use_llvm=yes use_msan=yes udev=no linker=gold # Disable udev because memory sanitizer finds invalid memory usage inside udev library
             artifact: true
             
 #          - name: Editor Mono Sanitizers LLVM
