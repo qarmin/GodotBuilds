@@ -35,7 +35,6 @@ jobs:
             tools: true
             tests: false
             sconsflags: use_ubsan=yes use_asan=yes
-            bin: "./bin/godot.x11.tools.64s"
             artifact: true
             
           - name: Template Release Sanitizers
@@ -44,7 +43,6 @@ jobs:
             tools: false
             tests: false
             sconsflags: use_ubsan=yes use_asan=yes optimize=none
-            bin: "./bin/godot.x11.opt.64s"
             artifact: true
             
 #          - name: Editor Mono Normal
@@ -62,7 +60,6 @@ jobs:
             target: debug
             tools: true
             tests: false
-            bin: "./bin/godot.x11.tools.64"
             artifact: true
             
           - name: Template Release Normal
@@ -71,7 +68,6 @@ jobs:
             tools: false
             tests: false
             sconsflags: optimize=none
-            bin: "./bin/godot.x11.opt.64"
             artifact: true
 
           - name: Editor Minimal
@@ -79,8 +75,7 @@ jobs:
             target: debug
             tools: true
             tests: false
-            sconsflags: module_bmp_enabled=no module_bullet_enabled=no module_camera_enabled=no module_csg_enabled=no module_cvtt_enabled=no module_dds_enabled=no module_denoise_enabled=no module_enet_enabled=no module_etc_enabled=no module_fbx_enabled=no module_gdnative_enabled=no module_gdscript_enabled=no module_gltf_enabled=no module_gridmap_enabled=no module_hdr_enabled=no module_jpg_enabled=no module_jsonrpc_enabled=no module_lightmapper_cpu_enabled=no module_mbedtls_enabled=no module_minimp3_enabled=no module_mobile_vr_enabled=no module_ogg_enabled=no module_opensimplex_enabled=no module_opus_enabled=no module_pvr_enabled=no module_raycast_enabled=no module_squish_enabled=no module_stb_vorbis_enabled=no module_svg_enabled=no module_tga_enabled=no module_theora_enabled=no module_tinyexr_enabled=no module_upnp_enabled=no module_vhacd_enabled=no module_visual_script_enabled=no module_vorbis_enabled=no module_webm_enabled=no module_webp_enabled=no module_webrtc_enabled=no module_websocket_enabled=no module_webxr_enabled=no module_xatlas_unwrap_enabled=no module_regex_enabled=no
-            bin: "./bin/godot.x11.tools.64"
+            sconsflags: module_bmp_enabled=no module_bullet_enabled=no module_camera_enabled=no module_csg_enabled=no module_cvtt_enabled=no module_dds_enabled=no module_denoise_enabled=no module_enet_enabled=no module_etc_enabled=no module_fbx_enabled=no module_gdnative_enabled=no module_gltf_enabled=no module_gridmap_enabled=no module_hdr_enabled=no module_jpg_enabled=no module_jsonrpc_enabled=no module_lightmapper_cpu_enabled=no module_mbedtls_enabled=no module_minimp3_enabled=no module_mobile_vr_enabled=no module_ogg_enabled=no module_opensimplex_enabled=no module_opus_enabled=no module_pvr_enabled=no module_raycast_enabled=no module_squish_enabled=no module_stb_vorbis_enabled=no module_tga_enabled=no module_theora_enabled=no module_tinyexr_enabled=no module_upnp_enabled=no module_vhacd_enabled=no module_visual_script_enabled=no module_vorbis_enabled=no module_webm_enabled=no module_webp_enabled=no module_webrtc_enabled=no module_websocket_enabled=no module_webxr_enabled=no module_xatlas_unwrap_enabled=no module_regex_enabled=no
             artifact: true
 
           - name: Editor Minimal Sanitizers
@@ -88,8 +83,23 @@ jobs:
             target: debug
             tools: true
             tests: false
-            sconsflags: module_bmp_enabled=no module_bullet_enabled=no module_camera_enabled=no module_csg_enabled=no module_cvtt_enabled=no module_dds_enabled=no module_denoise_enabled=no module_enet_enabled=no module_etc_enabled=no module_fbx_enabled=no module_gdnative_enabled=no module_gdscript_enabled=no module_gltf_enabled=no module_gridmap_enabled=no module_hdr_enabled=no module_jpg_enabled=no module_jsonrpc_enabled=no module_lightmapper_cpu_enabled=no module_mbedtls_enabled=no module_minimp3_enabled=no module_mobile_vr_enabled=no module_ogg_enabled=no module_opensimplex_enabled=no module_opus_enabled=no module_pvr_enabled=no module_raycast_enabled=no module_squish_enabled=no module_stb_vorbis_enabled=no module_svg_enabled=no module_tga_enabled=no module_theora_enabled=no module_tinyexr_enabled=no module_upnp_enabled=no module_vhacd_enabled=no module_visual_script_enabled=no module_vorbis_enabled=no module_webm_enabled=no module_webp_enabled=no module_webrtc_enabled=no module_websocket_enabled=no module_webxr_enabled=no module_xatlas_unwrap_enabled=no module_regex_enabled=no use_ubsan=yes use_asan=yes
-            bin: "./bin/godot.x11.tools.64s"
+            sconsflags: module_bmp_enabled=no module_bullet_enabled=no module_camera_enabled=no module_csg_enabled=no module_cvtt_enabled=no module_dds_enabled=no module_denoise_enabled=no module_enet_enabled=no module_etc_enabled=no module_fbx_enabled=no module_gdnative_enabled=no module_gltf_enabled=no module_gridmap_enabled=no module_hdr_enabled=no module_jpg_enabled=no module_jsonrpc_enabled=no module_lightmapper_cpu_enabled=no module_mbedtls_enabled=no module_minimp3_enabled=no module_mobile_vr_enabled=no module_ogg_enabled=no module_opensimplex_enabled=no module_opus_enabled=no module_pvr_enabled=no module_raycast_enabled=no module_squish_enabled=no module_stb_vorbis_enabled=no module_tga_enabled=no module_theora_enabled=no module_tinyexr_enabled=no module_upnp_enabled=no module_vhacd_enabled=no module_visual_script_enabled=no module_vorbis_enabled=no module_webm_enabled=no module_webp_enabled=no module_webrtc_enabled=no module_websocket_enabled=no module_webxr_enabled=no module_xatlas_unwrap_enabled=no module_regex_enabled=no use_ubsan=yes use_asan=yes
+            artifact: true
+
+          - name: Editor Thread Sanitizer
+            cache-name: linux3x-editor-thread-sanitizer
+            target: debug
+            tools: true
+            tests: true
+            sconsflags: use_tsan=yes module_webm_enabled=no module_webp_enabled=no module_lightmapper_cpu_enabled=no module_denoise_enabled=no module_webxr_enabled=no module_mobile_vr_enabled=no optimize=speed use_llvm=yes # Without it, will compile with really bad performance
+            artifact: true
+
+          - name: Editor Memory Sanitizer
+            cache-name: linux3x-editor-memory-sanitizer
+            target: debug
+            tools: true
+            tests: true
+            sconsflags: use_msan=yes use_llvm=yes
             artifact: true
             
 #          - name: Editor Mono Sanitizers LLVM
