@@ -91,7 +91,7 @@ jobs:
             target: debug
             tools: true
             tests: true
-            sconsflags: use_tsan=yes debug_symbols=yes module_webm_enabled=no module_webp_enabled=no module_lightmapper_cpu_enabled=no module_denoise_enabled=no module_webxr_enabled=no module_mobile_vr_enabled=no optimize=speed use_llvm=yes # Without it, will compile with really bad performance
+            sconsflags: use_tsan=yes module_webm_enabled=no module_webp_enabled=no module_lightmapper_cpu_enabled=no module_denoise_enabled=no module_webxr_enabled=no module_mobile_vr_enabled=no use_llvm=yes CCFLAGS="-O2"
             artifact: true
 
           - name: Editor Memory Sanitizer
