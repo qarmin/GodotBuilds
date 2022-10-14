@@ -3,13 +3,17 @@ This repository contains few CI workflows to generate linux template, editor and
 
 Ready to use binaries are in [actions](https://github.com/qarmin/GodotBuilds/actions) or [releases](https://github.com/qarmin/GodotBuilds/releases) tab.
 
-Provided binaries are from the latest commit of each Godot branch - 3.4, 3.x and master
+Provided binaries are from the latest commit of each Godot branch - 3.x and master
 
 **What is this?**  
-This are normal Godot builds compiled with Address, Leak and Undefined sanitizers support.
+This are normal Godot builds compiled with Address, Leak, Undefined, Thread or Memory sanitizers support.
 - Leak sanitizer - at the end prints info about leaked memory
 - Undefined sanitizer - during run prints info about undefined C/C++ behaviour like dereferencing null pointer
 - Address sanitizer - crashes entire app when critical event happens like e.g. usage after free or array overflow and prints exact place when memory was allocated, freed etc.
+- Thread sanitizer - finds bugs caused by wrong operating of memory from multiple threads
+- Memory sanitizer - checks for usage of undefined variables
+
+Additionally there is also produced minimal build which is fast to compile, and takes a lot of less space on disk(needed to test if after disabling a lot of modules, still works fine)
 
 **Why I may need this?**  
 Sometimes game/app crash, even if looks that code looks fine.  
