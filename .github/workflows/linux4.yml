@@ -106,7 +106,7 @@ jobs:
           - name: Editor Memory Sanitizer
             cache-name: linux4-editor-memory-sanitizer
             target: editor
-            sconsflags: tests=yes use_llvm=yes use_msan=yes udev=no linker=gold # Disable udev because memory sanitizer finds invalid memory usage inside udev library
+            sconsflags: use_llvm=yes use_msan=yes udev=no linker=gold # Disable udev because memory sanitizer finds invalid memory usage inside udev library
             artifact: true
             
 #          - name: Editor Mono Sanitizers LLVM
