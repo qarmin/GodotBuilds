@@ -25,6 +25,7 @@ jobs:
             sconsflags: module_mono_enabled=yes mono_glue=no use_ubsan=yes use_asan=yes tests=yes
             build-mono: true
             artifact: true
+            bin: godot.linuxbsd.editor.dev.x86_64.san.mono
 
           - name: Editor Sanitizers
             cache-name: linux4-editor-sanitizers
@@ -50,6 +51,7 @@ jobs:
             sconsflags: module_mono_enabled=yes mono_glue=no tests=yes
             build-mono: true
             artifact: true
+            bin: godot.linuxbsd.editor.dev.x86_64.mono
 
           - name: Editor Normal
             cache-name: linux4-editor-normal
