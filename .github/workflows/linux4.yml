@@ -184,7 +184,7 @@ jobs:
         if: ${{ matrix.build-mono }}
         run: |
           cd godot
-          ${{ matrix.bin }} --headless --generate-mono-glue modules/mono/glue || true
+          bin/${{ matrix.bin }} --headless --generate-mono-glue modules/mono/glue || true
           cd ..
 
       # Rebuild with mono
