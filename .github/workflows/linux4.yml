@@ -107,10 +107,11 @@ jobs:
             sconsflags: tests=yes use_llvm=yes use_tsan=yes debug_symbols=yes module_lightmapper_rd_enabled=no module_mobile_vr_enabled=no module_webp_enabled=no module_raycast_enabled=no module_mobile_vr_enabled=no linker=gold CCFLAGS="-O2"
             artifact: true
 
+
           - name: Editor Memory Sanitizer
             cache-name: linux4-editor-memory-sanitizer
             target: editor
-            sconsflags: use_llvm=yes use_msan=yes udev=no linker=gold # Disable udev because memory sanitizer finds invalid memory usage inside udev library
+            sconsflags: use_llvm=yes use_msan=yes udev=no fontconfig=no linker=gold # Disable udev because memory sanitizer finds invalid memory usage inside udev library
             artifact: true
             
 #          - name: Editor Mono Sanitizers LLVM
