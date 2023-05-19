@@ -160,14 +160,6 @@ jobs:
       - name: Setup python and scons
         uses: ./.github/actions/godot-deps
 
-      - name: Apply Patch with with Variant Tester
-        run: |
-          ls
-          cd godot
-          wget https://patch-diff.githubusercontent.com/raw/godotengine/godot/pull/52075.patch -O 3x.patch
-          git apply 3x.patch
-          cd ..
-
       - name: Compilation
         run: |
           ls
